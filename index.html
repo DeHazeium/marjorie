@@ -4,35 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Blue Garden Just for You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
-    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* Emoji styling for consistency */
-        img.emoji {
-            height: 1em;
-            width: 1em;
-            margin: 0 .05em 0 .1em;
-            vertical-align: -0.1em;
-            display: inline-block;
+        /* Emoji styling for consistency - Windows style */
+        body, button, div, p, h1, h2 {
+            font-family: 'Montserrat', 'Segoe UI Emoji', sans-serif;
         }
 
-        .flower img.emoji,
-        .sleepy-cat img.emoji,
-        .big-cat img.emoji {
-            height: 1em;
-            width: 1em;
+        body {
+            font-family: 'Montserrat', 'Segoe UI Emoji', sans-serif;
+            overflow-x: hidden;
+            background: #e3f2fd;
+        }
+
+        /* Override for text to use Montserrat */
+        .landing-text, .lily-text, .cat-bubble, .letter, .final-content {
+            font-family: 'Montserrat', 'Segoe UI Emoji', sans-serif;
+        }
+
+        /* Cursive with emoji support */
+        .name-dedication, .from-name {
+            font-family: 'Great Vibes', 'Segoe UI Emoji', cursive;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Courier New', 'Georgia', serif;
-            overflow-x: hidden;
-            background: #e3f2fd;
         }
 
         /* Cursive names styling */
@@ -46,13 +44,96 @@
                          0 4px 20px rgba(100, 181, 246, 0.3);
             letter-spacing: 2px;
             position: relative;
-            overflow: hidden;
         }
 
         .name-dedication span {
             display: inline-block;
             opacity: 0;
             animation: writeText 3s ease-out forwards, gentleSway 3s ease-in-out infinite 3s;
+            position: relative;
+        }
+
+        /* Floating hearts around name */
+        .name-hearts {
+            position: absolute;
+            font-size: 0.4em;
+            pointer-events: none;
+        }
+
+        .heart-1 {
+            top: -20px;
+            left: -30px;
+            animation: floatHeart1 4s ease-in-out infinite 3s;
+            opacity: 0;
+            animation-fill-mode: both;
+        }
+
+        .heart-2 {
+            top: -25px;
+            right: -30px;
+            animation: floatHeart2 4s ease-in-out infinite 3.5s;
+            opacity: 0;
+            animation-fill-mode: both;
+        }
+
+        .heart-3 {
+            bottom: -25px;
+            left: 20%;
+            animation: floatHeart3 4s ease-in-out infinite 3.2s;
+            opacity: 0;
+            animation-fill-mode: both;
+        }
+
+        .heart-4 {
+            bottom: -25px;
+            right: 20%;
+            animation: floatHeart4 4s ease-in-out infinite 3.7s;
+            opacity: 0;
+            animation-fill-mode: both;
+        }
+
+        @keyframes floatHeart1 {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1.3);
+            }
+        }
+
+        @keyframes floatHeart2 {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-15px) rotate(15deg) scale(1.2);
+            }
+        }
+
+        @keyframes floatHeart3 {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(10px) scale(1.25);
+            }
+        }
+
+        @keyframes floatHeart4 {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(8px) rotate(-15deg) scale(1.3);
+            }
         }
 
         @keyframes writeText {
@@ -420,7 +501,7 @@
             cursor: pointer;
             margin-top: 30px;
             transition: all 0.3s ease;
-            font-family: 'Courier New', serif;
+            font-family: 'Montserrat', 'Segoe UI Emoji', sans-serif;
             position: relative;
             z-index: 100;
             box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
@@ -441,9 +522,35 @@
             transition: width 0.6s, height 0.6s;
         }
 
+        .btn::after {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
         .btn:hover::before {
             width: 300px;
             height: 300px;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+            animation: sparkleRotate 1s ease-in-out infinite;
+        }
+
+        @keyframes sparkleRotate {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg) scale(1.3);
+            }
         }
 
         .btn:hover {
@@ -601,8 +708,12 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { 
+                transform: translateY(0); 
+            }
+            50% { 
+                transform: translateY(-20px); 
+            }
         }
 
         .big-cat:hover {
@@ -620,9 +731,10 @@
 
         @keyframes meow {
             0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-15deg) scale(1.1); }
-            50% { transform: rotate(15deg) scale(1.15); }
-            75% { transform: rotate(-10deg) scale(1.1); }
+            10% { transform: rotate(-15deg) scale(1.15); }
+            30% { transform: rotate(15deg) scale(1.2); }
+            50% { transform: rotate(-10deg) scale(1.15); }
+            70% { transform: rotate(10deg) scale(1.1); }
         }
 
         .cat-bubble {
@@ -681,7 +793,7 @@
         }
 
         .love-item {
-            background: #e3f2fd;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             padding: 15px;
             margin: 10px 0;
             border-radius: 10px;
@@ -690,6 +802,7 @@
             opacity: 0;
             transform: translateX(-20px);
             animation: slideIn 0.5s ease-out forwards;
+            border: 2px solid #90caf9;
         }
 
         .love-item:nth-child(1) { animation-delay: 0.1s; }
@@ -707,9 +820,11 @@
         }
 
         .love-item:hover {
-            transform: scale(1.05);
-            background: #bbdefb;
+            transform: scale(1.05) translateY(-5px);
+            background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(100, 181, 246, 0.4);
+            border-color: #64b5f6;
         }
 
         /* Page 4 - Letter */
@@ -1195,7 +1310,15 @@
         <div class="flower" style="top: 30%; left: 50%; animation-delay: 0.5s;">🤍</div>
         
         <div class="landing-text">
-            <div class="name-dedication"><span>To Marjorie 💙</span></div>
+            <div class="name-dedication">
+                <span>
+                    To Marjorie 💙
+                    <div class="name-hearts heart-1">💕</div>
+                    <div class="name-hearts heart-2">💖</div>
+                    <div class="name-hearts heart-3">💗</div>
+                    <div class="name-hearts heart-4">💝</div>
+                </span>
+            </div>
             <h1>I made this because saying "I'm sorry" didn't feel like enough… and because you deserve to know how badly I feel about making you cry.</h1>
             <button class="btn" onclick="goToPage(2)">💙 Come walk with me</button>
         </div>
@@ -1382,14 +1505,6 @@
             if (pageNum === 5) {
                 generateStars();
             }
-
-            // Re-parse emojis for new page
-            if (typeof twemoji !== 'undefined') {
-                twemoji.parse(targetPage, {
-                    folder: 'svg',
-                    ext: '.svg'
-                });
-            }
         }
 
         // Cat interaction
@@ -1510,7 +1625,7 @@
             const starField = document.getElementById('starField');
             if (starField.children.length > 0) return; // Already generated
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 50; i++) {  // Reduced from 100 to 50
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
@@ -1552,7 +1667,7 @@
             const container = document.getElementById('particles1');
             if (!container) return;
             
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 15; i++) {  // Reduced from 30 to 15
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
@@ -1563,14 +1678,6 @@
         }
 
         generateParticles();
-
-        // Parse all emojis with Twemoji for consistent rendering
-        if (typeof twemoji !== 'undefined') {
-            twemoji.parse(document.body, {
-                folder: 'svg',
-                ext: '.svg'
-            });
-        }
 
         // Create ripple effect on click
         document.addEventListener('click', function(e) {
