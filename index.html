@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Blue Garden Just for You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <style>
+        /* Emoji styling for consistency */
+        img.emoji {
+            height: 1em;
+            width: 1em;
+            margin: 0 .05em 0 .1em;
+            vertical-align: -0.1em;
+            display: inline-block;
+        }
+
+        .flower img.emoji,
+        .sleepy-cat img.emoji,
+        .big-cat img.emoji {
+            height: 1em;
+            width: 1em;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,6 +33,223 @@
             font-family: 'Courier New', 'Georgia', serif;
             overflow-x: hidden;
             background: #e3f2fd;
+        }
+
+        /* Cursive names styling */
+        .name-dedication {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            color: #1565c0;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeInScale 2s ease-in, float 3s ease-in-out infinite;
+            text-shadow: 0 2px 10px rgba(100, 181, 246, 0.5),
+                         0 4px 20px rgba(100, 181, 246, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .name-dedication::before {
+            content: '✨';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkleLeft 2s ease-in-out infinite;
+        }
+
+        .name-dedication span::after {
+            content: '✨';
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkleRight 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkleLeft {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(-50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
+
+        @keyframes sparkleRight {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(-50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
+
+        .name-dedication::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64b5f6, transparent);
+            animation: lineGrow 2s ease-out;
+        }
+
+        @keyframes lineGrow {
+            0% { width: 0; }
+            100% { width: 150px; }
+        }
+
+        .from-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
+            color: #1565c0;
+            display: inline-block;
+            animation: writeIn 3s ease-out;
+            text-shadow: 0 2px 8px rgba(100, 181, 246, 0.4);
+            position: relative;
+        }
+
+        .from-name::before {
+            content: '💕';
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6em;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        .from-name::after {
+            content: '💕';
+            position: absolute;
+            right: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6em;
+            animation: heartBeat 1.5s ease-in-out infinite;
+            animation-delay: 0.75s;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.3);
+            }
+        }
+
+        @keyframes writeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.8);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Particle background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Aurora effect */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .aurora-wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(100, 181, 246, 0.3), 
+                rgba(144, 202, 249, 0.3), 
+                transparent);
+            animation: auroraMove 20s ease-in-out infinite;
+        }
+
+        @keyframes auroraMove {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(0%) translateY(-10%);
+            }
         }
 
         .page {
@@ -30,6 +265,8 @@
             width: 100%;
             top: 0;
             left: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .page.active {
@@ -54,6 +291,54 @@
             background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: moveBackground 20s linear infinite;
+        }
+
+        /* Morphing blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: blobMove 20s ease-in-out infinite;
+        }
+
+        .blob1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #64b5f6, #90caf9);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .blob2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #bbdefb, #e3f2fd);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .blob3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(225deg, #90caf9, #64b5f6);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes blobMove {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.2);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.8);
+            }
         }
 
         @keyframes moveBackground {
@@ -127,7 +412,8 @@
             margin-bottom: 30px;
             font-weight: 300;
             line-height: 1.4;
-            animation: fadeInUp 1.5s ease-out;
+            animation: fadeInUp 1.5s ease-out, textGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
         }
 
         @keyframes fadeInUp {
@@ -138,6 +424,16 @@
             100% {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(100, 181, 246, 0.6),
+                             0 0 40px rgba(100, 181, 246, 0.4);
             }
         }
 
@@ -200,14 +496,32 @@
         /* Page 2 - Lily Path */
         #page2 {
             background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
-            padding-top: 60px;
-            padding-bottom: 60px;
-            overflow-y: auto;
+            padding: 40px 20px;
+            justify-content: flex-start;
+        }
+
+        #page2::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #page2::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        #page2::-webkit-scrollbar-thumb {
+            background: rgba(100, 181, 246, 0.5);
+            border-radius: 10px;
+        }
+
+        #page2::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 181, 246, 0.8);
         }
 
         .lily-path {
             max-width: 600px;
             width: 100%;
+            padding: 20px 0;
         }
 
         .lily-item {
@@ -260,12 +574,14 @@
             font-size: 1.1em;
             line-height: 1.6;
             margin-bottom: 10px;
+            animation: fadeInText 0.8s ease-out;
         }
 
         .lily-text .learned {
             color: #5e92f3;
             font-style: italic;
             font-size: 0.95em;
+            animation: fadeInText 1s ease-out;
         }
 
         /* Page 3 - The Cat */
@@ -278,6 +594,23 @@
             max-width: 600px;
             position: relative;
             z-index: 10;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .cat-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .cat-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
         }
 
         .big-cat {
@@ -361,6 +694,7 @@
             font-size: 1.2em;
             line-height: 1.6;
             margin: 10px 0;
+            animation: fadeInText 1s ease-out;
         }
 
         .hidden-loves {
@@ -408,9 +742,26 @@
         /* Page 4 - Letter */
         #page4 {
             background: linear-gradient(180deg, #90caf9 0%, #64b5f6 100%);
-            overflow-y: auto;
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding: 40px 20px;
+            justify-content: flex-start;
+        }
+
+        #page4::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #page4::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        #page4::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+        }
+
+        #page4::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.8);
         }
 
         .letter {
@@ -467,6 +818,7 @@
             margin-bottom: 30px;
             font-weight: 300;
             text-align: center;
+            animation: fadeInScale 1s ease-out;
         }
 
         .letter p {
@@ -475,7 +827,16 @@
             line-height: 1.8;
             margin-bottom: 20px;
             text-indent: 30px;
+            animation: fadeInText 1s ease-out;
         }
+
+        .letter p:nth-child(3) { animation-delay: 0.1s; }
+        .letter p:nth-child(4) { animation-delay: 0.2s; }
+        .letter p:nth-child(5) { animation-delay: 0.3s; }
+        .letter p:nth-child(6) { animation-delay: 0.4s; }
+        .letter p:nth-child(7) { animation-delay: 0.5s; }
+        .letter p:nth-child(8) { animation-delay: 0.6s; }
+        .letter p:nth-child(9) { animation-delay: 0.7s; }
 
         .letter .signature {
             text-align: right;
@@ -531,6 +892,7 @@
             font-size: 2.5em;
             margin-bottom: 30px;
             font-weight: 300;
+            animation: fadeInScale 1s ease-out, textGlow 3s ease-in-out infinite;
         }
 
         .glow-lily {
@@ -699,6 +1061,29 @@
             animation: floatUp 3s ease-out forwards;
         }
 
+        /* Ripple effect */
+        .ripple {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(100, 181, 246, 0.3);
+            pointer-events: none;
+            animation: rippleEffect 0.8s ease-out;
+            z-index: 9998;
+        }
+
+        @keyframes rippleEffect {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.5;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
         /* Navigation */
         .nav-dots {
             position: fixed;
@@ -729,6 +1114,18 @@
         @media (max-width: 768px) {
             .landing-text h1 {
                 font-size: 1.8em;
+            }
+
+            .name-dedication {
+                font-size: 2.2em;
+            }
+
+            .name-dedication::before {
+                left: -30px;
+            }
+
+            .name-dedication span::after {
+                right: -30px;
             }
 
             .btn {
@@ -808,7 +1205,20 @@
     <div class="nav-dots" id="navDots"></div>
 
     <!-- Page 1: Landing -->
-    <div class="page active" id="page1">
+    <div class="page active" id="page1" style="display: flex;">
+        <!-- Aurora background -->
+        <div class="aurora">
+            <div class="aurora-wave"></div>
+        </div>
+        
+        <!-- Morphing blobs -->
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+        
+        <!-- Particles -->
+        <div class="particles" id="particles1"></div>
+        
         <div class="flower" style="top: 10%; left: 10%; animation-delay: 0s;">🤍</div>
         <div class="flower" style="top: 20%; right: 15%; animation-delay: 1s;">🤍</div>
         <div class="flower" style="top: 70%; left: 20%; animation-delay: 2s;">🤍</div>
@@ -816,6 +1226,7 @@
         <div class="flower" style="top: 30%; left: 50%; animation-delay: 0.5s;">🤍</div>
         
         <div class="landing-text">
+            <div class="name-dedication"><span>To Marjorie 💙</span></div>
             <h1>I made this because saying "I'm sorry" didn't feel like enough… and because you deserve to know how badly I feel about making you cry.</h1>
             <button class="btn" onclick="goToPage(2)">💙 Come walk with me</button>
         </div>
@@ -824,7 +1235,7 @@
     </div>
 
     <!-- Page 2: Lily Path -->
-    <div class="page" id="page2">
+    <div class="page" id="page2" style="display: none;">
         <div class="lily-path">
             <div class="lily-item">
                 <div class="lily-icon">🤍</div>
@@ -873,7 +1284,7 @@
     </div>
 
     <!-- Page 3: The Cat -->
-    <div class="page" id="page3">
+    <div class="page" id="page3" style="display: none;">
         <div class="cat-container">
             <div class="big-cat" id="interactiveCat" onclick="catClick()">😺</div>
             
@@ -898,7 +1309,7 @@
     </div>
 
     <!-- Page 4: Letter -->
-    <div class="page" id="page4">
+    <div class="page" id="page4" style="display: none;">
         <div class="letter">
             <h2>A Letter From My Heart</h2>
             
@@ -918,7 +1329,7 @@
 
             <p>I'm not asking you to forgive me right away. I just need you to know that making you cry broke my heart, and I never want to do that again.</p>
 
-            <p class="signature">Forever yours,<br>With all my heart 💙</p>
+            <p class="signature">Forever yours,<br><span class="from-name">From Irfan</span> 💙</p>
 
             <div style="text-align: center; margin-top: 40px;">
                 <button class="btn" onclick="goToPage(5)">🌙</button>
@@ -927,7 +1338,7 @@
     </div>
 
     <!-- Page 5: Final Choice -->
-    <div class="page" id="page5">
+    <div class="page" id="page5" style="display: none;">
         <div class="stars" id="starField"></div>
         
         <div class="final-content">
@@ -961,9 +1372,25 @@
         }
 
         function goToPage(pageNum) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page${pageNum}`).classList.add('active');
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active');
+                p.style.display = 'none';
+            });
             
+            // Show target page
+            const targetPage = document.getElementById(`page${pageNum}`);
+            targetPage.style.display = 'flex';
+            
+            // Small delay to ensure display is set before adding active class
+            setTimeout(() => {
+                targetPage.classList.add('active');
+            }, 10);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update navigation dots
             document.querySelectorAll('.dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index + 1 === pageNum);
             });
@@ -985,6 +1412,14 @@
             // Generate stars for page 5
             if (pageNum === 5) {
                 generateStars();
+            }
+
+            // Re-parse emojis for new page
+            if (typeof twemoji !== 'undefined') {
+                twemoji.parse(targetPage, {
+                    folder: 'svg',
+                    ext: '.svg'
+                });
             }
         }
 
@@ -1142,6 +1577,42 @@
 
         // Initialize
         createNavDots();
+
+        // Generate particles
+        function generateParticles() {
+            const container = document.getElementById('particles1');
+            if (!container) return;
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        generateParticles();
+
+        // Parse all emojis with Twemoji for consistent rendering
+        if (typeof twemoji !== 'undefined') {
+            twemoji.parse(document.body, {
+                folder: 'svg',
+                ext: '.svg'
+            });
+        }
+
+        // Create ripple effect on click
+        document.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = (e.clientX - 150) + 'px';
+            ripple.style.top = (e.clientY - 150) + 'px';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 800);
+        });
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
