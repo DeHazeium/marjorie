@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Blue Garden Just for You</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Allura&family=Sacramento&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
     <style>
         /* Emoji styling for consistency - Windows style */
         body, button, div, p, h1, h2 {
@@ -1192,6 +1193,15 @@
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: popupBounce 0.5s ease-out;
+            min-height: 450px;
+            transition: min-height 0.6s ease;
+        }
+
+        .animation-stage {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
         }
 
         @keyframes popupBounce {
@@ -1214,74 +1224,46 @@
             color: #1565c0;
             margin-bottom: 20px;
             font-weight: 600;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .popup-header.fade-out {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-
-        .popup-header.fade-in {
-            animation: fadeInSlide 0.6s ease-out;
-        }
-
-        @keyframes fadeInSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .loading-animation {
             margin: 30px 0;
-            position: relative;
+            position: absolute;
+            width: 100%;
             height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .loading-animation.hide {
+            opacity: 0;
         }
 
         /* Phone animation container */
         .phone-animation {
-            position: relative;
+            position: absolute;
             width: 100%;
             height: 180px;
-            display: none;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            left: 0;
+            top: 80px;
         }
 
         .phone-animation.active {
-            display: block;
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
-        .phone-animation.fade-out {
-            animation: fadeOutScale 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeOutScale {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Phone devices */
@@ -1450,22 +1432,24 @@
 
         .hug-container {
             font-size: 80px;
-            margin: 20px 0;
-            position: relative;
+            position: absolute;
+            width: 100%;
             height: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            left: 0;
+            top: 80px;
+            transform: scale(0.9);
         }
 
-        .hug-container.show {
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
-        .hug-container.hide {
-            animation: fadeOutScale 0.5s ease-out forwards;
+        .hug-container.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
         }
 
         .hug-emoji {
@@ -1521,22 +1505,24 @@
         }
 
         .kiss-container {
-            margin: 30px 0;
-            position: relative;
+            position: absolute;
+            width: 100%;
             height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            left: 0;
+            top: 80px;
+            transform: scale(0.9);
         }
 
-        .kiss-container.show {
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
-        .kiss-container.hide {
-            animation: fadeOutScale 0.5s ease-out forwards;
+        .kiss-container.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
         }
 
         .kiss-emoji {
@@ -1646,6 +1632,14 @@
             color: #1565c0;
             margin: 20px 0;
             line-height: 1.6;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+        }
+
+        .popup-message.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .loading-dots {
@@ -1689,6 +1683,13 @@
             font-family: 'Montserrat', sans-serif;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .popup-close-btn.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .popup-close-btn:hover {
@@ -2045,62 +2046,64 @@
             
             <div class="popup-header">Sending...</div>
             
-            <div class="loading-animation">
-                <div class="loading-dots">
-                    <div class="dot-loading"></div>
-                    <div class="dot-loading"></div>
-                    <div class="dot-loading"></div>
+            <div class="animation-stage">
+                <div class="loading-animation">
+                    <div class="loading-dots">
+                        <div class="dot-loading"></div>
+                        <div class="dot-loading"></div>
+                        <div class="dot-loading"></div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Phone to Phone Animation for Hug -->
-            <div class="phone-animation" id="phoneHugAnimation">
-                <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
-                    <div class="phone phone-left"></div>
-                    <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇲🇾</div>
+                <!-- Phone to Phone Animation for Hug -->
+                <div class="phone-animation" id="phoneHugAnimation">
+                    <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
+                        <div class="phone phone-left"></div>
+                        <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇲🇾</div>
+                    </div>
+                    <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
+                        <div class="phone phone-right"></div>
+                        <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇵🇭</div>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="signal-wave wave-left"></div>
+                    <div class="signal-wave wave-right"></div>
+                    <div class="flying-emoji" style="animation-delay: 0s; font-family: 'Segoe UI Emoji', sans-serif !important;">🤗</div>
+                    <div class="flying-emoji" style="animation-delay: 2s; font-family: 'Segoe UI Emoji', sans-serif !important;">💙</div>
                 </div>
-                <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
-                    <div class="phone phone-right"></div>
-                    <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇵🇭</div>
-                </div>
-                <div class="connection-line"></div>
-                <div class="signal-wave wave-left"></div>
-                <div class="signal-wave wave-right"></div>
-                <div class="flying-emoji" style="animation-delay: 0s; font-family: 'Segoe UI Emoji', sans-serif !important;">🤗</div>
-                <div class="flying-emoji" style="animation-delay: 2s; font-family: 'Segoe UI Emoji', sans-serif !important;">💙</div>
-            </div>
 
-            <!-- Phone to Phone Animation for Kiss -->
-            <div class="phone-animation" id="phoneKissAnimation">
-                <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
-                    <div class="phone phone-left"></div>
-                    <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇲🇾</div>
+                <!-- Phone to Phone Animation for Kiss -->
+                <div class="phone-animation" id="phoneKissAnimation">
+                    <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
+                        <div class="phone phone-left"></div>
+                        <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇲🇾</div>
+                    </div>
+                    <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
+                        <div class="phone phone-right"></div>
+                        <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇵🇭</div>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="signal-wave wave-left"></div>
+                    <div class="signal-wave wave-right"></div>
+                    <div class="flying-emoji" style="animation-delay: 0s; font-family: 'Segoe UI Emoji', sans-serif !important;">😘</div>
+                    <div class="flying-emoji" style="animation-delay: 1.5s; font-family: 'Segoe UI Emoji', sans-serif !important;">💋</div>
+                    <div class="flying-emoji" style="animation-delay: 3s; font-family: 'Segoe UI Emoji', sans-serif !important;">💖</div>
                 </div>
-                <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
-                    <div class="phone phone-right"></div>
-                    <div class="flag" style="font-family: 'Segoe UI Emoji', sans-serif !important;">🇵🇭</div>
+
+                <div class="hug-container" id="hugContainer">
+                    <div class="hug-emoji hug-left">🤗</div>
+                    <div class="hug-heart">💙</div>
+                    <div class="hug-emoji hug-right">🤗</div>
                 </div>
-                <div class="connection-line"></div>
-                <div class="signal-wave wave-left"></div>
-                <div class="signal-wave wave-right"></div>
-                <div class="flying-emoji" style="animation-delay: 0s; font-family: 'Segoe UI Emoji', sans-serif !important;">😘</div>
-                <div class="flying-emoji" style="animation-delay: 1.5s; font-family: 'Segoe UI Emoji', sans-serif !important;">💋</div>
-                <div class="flying-emoji" style="animation-delay: 3s; font-family: 'Segoe UI Emoji', sans-serif !important;">💖</div>
-            </div>
 
-            <div class="hug-container" id="hugContainer" style="display: none;">
-                <div class="hug-emoji hug-left">🤗</div>
-                <div class="hug-heart">💙</div>
-                <div class="hug-emoji hug-right">🤗</div>
-            </div>
-
-            <div class="kiss-container" id="kissContainer" style="display: none;">
-                <span class="kiss-emoji">😘</span>
-                <span class="kiss-emoji">💋</span>
-                <span class="kiss-emoji">😘</span>
-                <span class="kiss-emoji">💋</span>
-                <span class="kiss-emoji">😘</span>
-                <div class="kiss-center">💖</div>
+                <div class="kiss-container" id="kissContainer">
+                    <span class="kiss-emoji">😘</span>
+                    <span class="kiss-emoji">💋</span>
+                    <span class="kiss-emoji">😘</span>
+                    <span class="kiss-emoji">💋</span>
+                    <span class="kiss-emoji">😘</span>
+                    <div class="kiss-center">💖</div>
+                </div>
             </div>
 
             <div class="popup-message" id="popupMessage"></div>
@@ -2249,6 +2252,16 @@
             }
         });
 
+        // Helper function to change text smoothly
+        function changeTextSmooth(element, newText, callback) {
+            element.style.opacity = '0';
+            setTimeout(() => {
+                element.textContent = newText;
+                element.style.opacity = '1';
+                if (callback) setTimeout(callback, 300);
+            }, 300);
+        }
+
         // Final page response
         function showResponse(choice) {
             const popup = document.getElementById('hugKissPopup');
@@ -2266,117 +2279,88 @@
             // Show popup
             popup.classList.add('show');
             
-            // Reset states
+            // Reset all states
             popupHeader.textContent = 'Sending...';
-            popupHeader.classList.remove('fade-out', 'fade-in');
+            popupHeader.style.opacity = '1';
             loadingAnimation.style.display = 'block';
-            phoneHugAnimation.classList.remove('active', 'fade-out');
-            phoneKissAnimation.classList.remove('active', 'fade-out');
-            hugContainer.style.display = 'none';
-            hugContainer.classList.remove('show', 'hide');
-            kissContainer.style.display = 'none';
-            kissContainer.classList.remove('show', 'hide');
+            loadingAnimation.style.opacity = '1';
+            phoneHugAnimation.classList.remove('active');
+            phoneKissAnimation.classList.remove('active');
+            hugContainer.classList.remove('active');
+            kissContainer.classList.remove('active');
+            popupMessage.classList.remove('active');
+            closeBtn.classList.remove('active');
             popupMessage.textContent = '';
-            closeBtn.style.display = 'none';
             
             // Create floating hearts
             createFloatingHearts();
             
-            // Step 1: Show initial loading (1.5 seconds)
+            // Timeline with smooth transitions
             setTimeout(() => {
-                loadingAnimation.style.opacity = '0';
-                setTimeout(() => {
-                    loadingAnimation.style.display = 'none';
-                    loadingAnimation.style.opacity = '1';
-                    
-                    // Animate text change
-                    popupHeader.classList.add('fade-out');
-                    setTimeout(() => {
-                        popupHeader.textContent = 'Sending Virtual Hug';
-                        popupHeader.classList.remove('fade-out');
-                        popupHeader.classList.add('fade-in');
-                        phoneHugAnimation.classList.add('active');
-                    }, 300);
-                }, 500);
+                // Fade out loading
+                loadingAnimation.classList.add('hide');
                 
-                // Step 2: Phone hug animation (4.5 seconds)
                 setTimeout(() => {
-                    phoneHugAnimation.classList.add('fade-out');
                     
-                    setTimeout(() => {
-                        phoneHugAnimation.classList.remove('active', 'fade-out');
-                        
-                        // Animate text change
-                        popupHeader.classList.add('fade-out');
-                        setTimeout(() => {
-                            popupHeader.textContent = 'Hug Sent';
-                            popupHeader.classList.remove('fade-out');
-                            popupHeader.classList.add('fade-in');
-                            
-                            hugContainer.style.display = 'flex';
-                            hugContainer.classList.add('show');
-                            createParticleBurst(popupContent, '#64b5f6');
-                        }, 300);
-                    }, 500);
+                    // Change to "Sending Virtual Hug"
+                    changeTextSmooth(popupHeader, 'Sending Virtual Hug', () => {
+                        phoneHugAnimation.classList.add('active');
+                    });
                     
-                    // Step 3: Show hug result (2.5 seconds)
+                    // After hug animation
                     setTimeout(() => {
-                        hugContainer.classList.add('hide');
+                        phoneHugAnimation.classList.remove('active');
                         
                         setTimeout(() => {
-                            hugContainer.style.display = 'none';
-                            hugContainer.classList.remove('show', 'hide');
+                            changeTextSmooth(popupHeader, 'Hug Sent', () => {
+                                hugContainer.classList.add('active');
+                                createParticleBurst(popupContent, '#64b5f6');
+                            });
                             
-                            // Animate text change
-                            popupHeader.classList.add('fade-out');
+                            // After showing hug
                             setTimeout(() => {
-                                popupHeader.textContent = 'Sending Virtual Kisses';
-                                popupHeader.classList.remove('fade-out');
-                                popupHeader.classList.add('fade-in');
-                                phoneKissAnimation.classList.add('active');
-                            }, 300);
-                        }, 500);
-                        
-                        // Step 4: Phone kiss animation (4.5 seconds)
-                        setTimeout(() => {
-                            phoneKissAnimation.classList.add('fade-out');
-                            
-                            setTimeout(() => {
-                                phoneKissAnimation.classList.remove('active', 'fade-out');
+                                hugContainer.classList.remove('active');
                                 
-                                // Animate text change
-                                popupHeader.classList.add('fade-out');
                                 setTimeout(() => {
-                                    popupHeader.textContent = 'Kisses Sent';
-                                    popupHeader.classList.remove('fade-out');
-                                    popupHeader.classList.add('fade-in');
+                                    changeTextSmooth(popupHeader, 'Sending Virtual Kisses', () => {
+                                        phoneKissAnimation.classList.add('active');
+                                    });
                                     
-                                    kissContainer.style.display = 'flex';
-                                    kissContainer.classList.add('show');
-                                    createParticleBurst(popupContent, '#ff69b4');
-                                }, 300);
-                            }, 500);
-                            
-                            // Step 5: Show kisses and final message (2.5 seconds)
-                            setTimeout(() => {
-                                if (choice === 'time') {
-                                    popupMessage.innerHTML = 'Thank you for being honest. Take all the time you need.<br>I\'m here whenever you\'re ready. 💙';
-                                } else {
-                                    popupMessage.innerHTML = 'Thank you for giving us a chance to talk.<br>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙';
-                                }
-                                closeBtn.style.display = 'inline-block';
-                                
-                                // Also update the main response
-                                if (choice === 'time') {
-                                    msg.innerHTML = '<p>Thank you for being honest. Take all the time you need.</p><p>I\'m here whenever you\'re ready. 💙</p>';
-                                } else {
-                                    msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
-                                }
-                                msg.classList.add('show');
-                            }, 3000);
-                        }, 4500);
-                    }, 3000);
-                }, 5000);
+                                    // After kiss animation
+                                    setTimeout(() => {
+                                        phoneKissAnimation.classList.remove('active');
+                                        
+                                        setTimeout(() => {
+                                            changeTextSmooth(popupHeader, 'Kisses Sent', () => {
+                                                kissContainer.classList.add('active');
+                                                createParticleBurst(popupContent, '#ff69b4');
+                                            });
+                                            
+                                            // Show final message
+                                            setTimeout(() => {
+                                                if (choice === 'time') {
+                                                    popupMessage.innerHTML = 'Thank you for being honest. Take all the time you need.<br>I\'m here whenever you\'re ready. 💙';
+                                                } else {
+                                                    popupMessage.innerHTML = 'Thank you for giving us a chance to talk.<br>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙';
+                                                }
+                                                popupMessage.classList.add('active');
+                                                closeBtn.classList.add('active');
+                                                
+                                                // Update main response
+                                                if (choice === 'time') {
+                                                    msg.innerHTML = '<p>Thank you for being honest. Take all the time you need.</p><p>I\'m here whenever you\'re ready. 💙</p>';
+                                                } else {
+                                                    msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
+                                                }
+                                                msg.classList.add('show');
+                                            }, 2500);
+                                        }, 500);
+                                    }, 4500);
+                                }, 500);
+                            }, 2500);
+                        }, 500);
+                    }, 4500);
+                }, 500);
             }, 1500);
         }
 
@@ -2491,6 +2475,11 @@
         }
 
         generateParticles();
+
+        // Parse all emojis with Twemoji for consistent look
+        if (typeof twemoji !== 'undefined') {
+            twemoji.parse(document.body);
+        }
 
         // Create ripple effect on click
         document.addEventListener('click', function(e) {
