@@ -330,18 +330,20 @@
             align-items: center;
             padding: 20px;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
             position: absolute;
             width: 100%;
             top: 0;
             left: 0;
             overflow-y: auto;
             overflow-x: hidden;
+            transform: scale(0.95);
         }
 
         .page.active {
             opacity: 1;
             position: relative;
+            transform: scale(1);
         }
 
         /* Page 1 - Landing */
@@ -552,6 +554,7 @@
 
         .btn:active {
             transform: translateY(-2px) scale(1.02);
+            transition: all 0.1s ease;
         }
 
         @keyframes pulse {
@@ -709,10 +712,12 @@
         .big-cat:hover {
             transform: scale(1.2) rotate(5deg);
             animation: none;
+            filter: drop-shadow(0 15px 30px rgba(100, 181, 246, 0.6));
         }
 
         .big-cat:active {
             transform: scale(0.95);
+            transition: transform 0.1s ease;
         }
 
         .big-cat.meow {
@@ -1119,15 +1124,19 @@
         @keyframes floatUp {
             0% {
                 opacity: 1;
-                transform: translateY(0) scale(0);
+                transform: translateY(0) scale(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(-10vh) scale(1) rotate(45deg);
             }
             50% {
-                opacity: 0.8;
-                transform: translateY(-50vh) scale(1);
+                opacity: 0.9;
+                transform: translateY(-50vh) scale(1.3) rotate(180deg);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-100vh) scale(0.5);
+                transform: translateY(-100vh) scale(0.5) rotate(360deg);
             }
         }
 
@@ -1153,11 +1162,11 @@
             0% {
                 width: 0;
                 height: 0;
-                opacity: 0.5;
+                opacity: 0.6;
             }
             100% {
-                width: 300px;
-                height: 300px;
+                width: 400px;
+                height: 400px;
                 opacity: 0;
             }
         }
@@ -1169,17 +1178,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .popup-overlay.show {
             display: flex;
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(8px);
+            }
         }
 
         .popup-content {
@@ -1206,14 +1226,17 @@
         @keyframes popupBounce {
             0% {
                 opacity: 0;
-                transform: scale(0.5) translateY(-100px);
+                transform: scale(0.3) translateY(-100px) rotate(-5deg);
             }
-            60% {
+            50% {
                 opacity: 1;
-                transform: scale(1.1) translateY(0);
+                transform: scale(1.05) translateY(10px) rotate(2deg);
+            }
+            70% {
+                transform: scale(0.95) translateY(-5px) rotate(-1deg);
             }
             100% {
-                transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0) rotate(0deg);
             }
         }
 
@@ -2373,14 +2396,14 @@
 
         // Create particle burst effect
         function createParticleBurst(container, color) {
-            const colors = [color, '#90caf9', '#64b5f6', '#42a5f5'];
-            for (let i = 0; i < 20; i++) {
+            const colors = [color, '#90caf9', '#64b5f6', '#42a5f5', '#fff'];
+            for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle-burst';
                 particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
-                const angle = (Math.PI * 2 * i) / 20;
-                const distance = 100 + Math.random() * 50;
+                const angle = (Math.PI * 2 * i) / 30;
+                const distance = 120 + Math.random() * 80;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
                 
