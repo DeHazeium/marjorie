@@ -1213,8 +1213,28 @@
             font-size: 2.5em;
             color: #1565c0;
             margin-bottom: 20px;
-            animation: writeText 1s ease-out;
             font-weight: 600;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .popup-header.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .popup-header.fade-in {
+            animation: fadeInSlide 0.6s ease-out;
+        }
+
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .loading-animation {
@@ -1229,10 +1249,39 @@
             width: 100%;
             height: 180px;
             display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
 
         .phone-animation.active {
             display: block;
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .phone-animation.fade-out {
+            animation: fadeOutScale 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeOutScale {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
         }
 
         /* Phone devices */
@@ -1407,6 +1456,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .hug-container.show {
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .hug-container.hide {
+            animation: fadeOutScale 0.5s ease-out forwards;
         }
 
         .hug-emoji {
@@ -1468,6 +1527,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .kiss-container.show {
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .kiss-container.hide {
+            animation: fadeOutScale 0.5s ease-out forwards;
         }
 
         .kiss-emoji {
@@ -2199,11 +2268,14 @@
             
             // Reset states
             popupHeader.textContent = 'Sending...';
+            popupHeader.classList.remove('fade-out', 'fade-in');
             loadingAnimation.style.display = 'block';
-            phoneHugAnimation.classList.remove('active');
-            phoneKissAnimation.classList.remove('active');
+            phoneHugAnimation.classList.remove('active', 'fade-out');
+            phoneKissAnimation.classList.remove('active', 'fade-out');
             hugContainer.style.display = 'none';
+            hugContainer.classList.remove('show', 'hide');
             kissContainer.style.display = 'none';
+            kissContainer.classList.remove('show', 'hide');
             popupMessage.textContent = '';
             closeBtn.style.display = 'none';
             
@@ -2212,29 +2284,78 @@
             
             // Step 1: Show initial loading (1.5 seconds)
             setTimeout(() => {
-                loadingAnimation.style.display = 'none';
-                popupHeader.textContent = 'Sending Virtual Hug...';
-                phoneHugAnimation.classList.add('active');
-                
-                // Step 2: Phone hug animation (4.5 seconds - longer)
+                loadingAnimation.style.opacity = '0';
                 setTimeout(() => {
-                    phoneHugAnimation.classList.remove('active');
-                    popupHeader.textContent = 'Virtual Hug!';
-                    hugContainer.style.display = 'flex';
-                    createParticleBurst(popupContent, '#64b5f6');
+                    loadingAnimation.style.display = 'none';
+                    loadingAnimation.style.opacity = '1';
+                    
+                    // Animate text change
+                    popupHeader.classList.add('fade-out');
+                    setTimeout(() => {
+                        popupHeader.textContent = 'Sending Virtual Hug';
+                        popupHeader.classList.remove('fade-out');
+                        popupHeader.classList.add('fade-in');
+                        phoneHugAnimation.classList.add('active');
+                    }, 300);
+                }, 500);
+                
+                // Step 2: Phone hug animation (4.5 seconds)
+                setTimeout(() => {
+                    phoneHugAnimation.classList.add('fade-out');
+                    
+                    setTimeout(() => {
+                        phoneHugAnimation.classList.remove('active', 'fade-out');
+                        
+                        // Animate text change
+                        popupHeader.classList.add('fade-out');
+                        setTimeout(() => {
+                            popupHeader.textContent = 'Hug Sent';
+                            popupHeader.classList.remove('fade-out');
+                            popupHeader.classList.add('fade-in');
+                            
+                            hugContainer.style.display = 'flex';
+                            hugContainer.classList.add('show');
+                            createParticleBurst(popupContent, '#64b5f6');
+                        }, 300);
+                    }, 500);
                     
                     // Step 3: Show hug result (2.5 seconds)
                     setTimeout(() => {
-                        hugContainer.style.display = 'none';
-                        popupHeader.textContent = 'Sending Kisses...';
-                        phoneKissAnimation.classList.add('active');
+                        hugContainer.classList.add('hide');
                         
-                        // Step 4: Phone kiss animation (4.5 seconds - longer)
                         setTimeout(() => {
-                            phoneKissAnimation.classList.remove('active');
-                            popupHeader.textContent = 'Sending Kisses!';
-                            kissContainer.style.display = 'flex';
-                            createParticleBurst(popupContent, '#ff69b4');
+                            hugContainer.style.display = 'none';
+                            hugContainer.classList.remove('show', 'hide');
+                            
+                            // Animate text change
+                            popupHeader.classList.add('fade-out');
+                            setTimeout(() => {
+                                popupHeader.textContent = 'Sending Virtual Kisses';
+                                popupHeader.classList.remove('fade-out');
+                                popupHeader.classList.add('fade-in');
+                                phoneKissAnimation.classList.add('active');
+                            }, 300);
+                        }, 500);
+                        
+                        // Step 4: Phone kiss animation (4.5 seconds)
+                        setTimeout(() => {
+                            phoneKissAnimation.classList.add('fade-out');
+                            
+                            setTimeout(() => {
+                                phoneKissAnimation.classList.remove('active', 'fade-out');
+                                
+                                // Animate text change
+                                popupHeader.classList.add('fade-out');
+                                setTimeout(() => {
+                                    popupHeader.textContent = 'Kisses Sent';
+                                    popupHeader.classList.remove('fade-out');
+                                    popupHeader.classList.add('fade-in');
+                                    
+                                    kissContainer.style.display = 'flex';
+                                    kissContainer.classList.add('show');
+                                    createParticleBurst(popupContent, '#ff69b4');
+                                }, 300);
+                            }, 500);
                             
                             // Step 5: Show kisses and final message (2.5 seconds)
                             setTimeout(() => {
@@ -2252,10 +2373,10 @@
                                     msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
                                 }
                                 msg.classList.add('show');
-                            }, 2500);
+                            }, 3000);
                         }, 4500);
-                    }, 2500);
-                }, 4500);
+                    }, 3000);
+                }, 5000);
             }, 1500);
         }
 
