@@ -1661,6 +1661,7 @@
             box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
             opacity: 0;
             transform: translateY(10px);
+            margin: 10px;
         }
 
         .popup-close-btn.active {
@@ -1671,6 +1672,14 @@
         .popup-close-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(66, 165, 245, 0.5);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         /* Hearts floating around popup */
@@ -2091,7 +2100,10 @@
 
             <div class="popup-message" id="popupMessage"></div>
 
-            <button class="popup-close-btn" id="closePopup" style="display: none;">Close 💙</button>
+            <div class="button-group">
+                <button class="popup-close-btn" id="closePopup">Close 💙</button>
+                <button class="popup-close-btn" id="goHomeBtn">Go Home 🏠</button>
+            </div>
         </div>
     </div>
 
@@ -2319,23 +2331,35 @@
                                                 createParticleBurst(popupContent, '#ff69b4');
                                             });
                                             
-                                            // Show final message
+                                            // Clear everything and show final message
                                             setTimeout(() => {
-                                                if (choice === 'time') {
-                                                    popupMessage.innerHTML = 'Thank you for being honest. Take all the time you need.<br>I\'m here whenever you\'re ready. 💙';
-                                                } else {
-                                                    popupMessage.innerHTML = 'Thank you for giving us a chance to talk.<br>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙';
-                                                }
-                                                popupMessage.classList.add('active');
-                                                closeBtn.classList.add('active');
+                                                // Fade out everything
+                                                popupHeader.style.opacity = '0';
+                                                kissContainer.classList.remove('active');
                                                 
-                                                // Update main response
-                                                if (choice === 'time') {
-                                                    msg.innerHTML = '<p>Thank you for being honest. Take all the time you need.</p><p>I\'m here whenever you\'re ready. 💙</p>';
-                                                } else {
-                                                    msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
-                                                }
-                                                msg.classList.add('show');
+                                                setTimeout(() => {
+                                                    // Hide header completely
+                                                    popupHeader.style.display = 'none';
+                                                    
+                                                    // Show final message
+                                                    if (choice === 'time') {
+                                                        popupMessage.innerHTML = 'Thank you for being honest. Take all the time you need.<br>I\'m here whenever you\'re ready. 💙';
+                                                    } else {
+                                                        popupMessage.innerHTML = 'Thank you for giving us a chance to talk.<br>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙';
+                                                    }
+                                                    popupMessage.style.marginTop = '40px';
+                                                    popupMessage.classList.add('active');
+                                                    closeBtn.classList.add('active');
+                                                    document.getElementById('goHomeBtn').classList.add('active');
+                                                    
+                                                    // Update main response
+                                                    if (choice === 'time') {
+                                                        msg.innerHTML = '<p>Thank you for being honest. Take all the time you need.</p><p>I\'m here whenever you\'re ready. 💙</p>';
+                                                    } else {
+                                                        msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
+                                                    }
+                                                    msg.classList.add('show');
+                                                }, 500);
                                             }, 2500);
                                         }, 500);
                                     }, 4500);
@@ -2374,6 +2398,12 @@
         // Close popup
         document.getElementById('closePopup').addEventListener('click', function() {
             document.getElementById('hugKissPopup').classList.remove('show');
+        });
+
+        // Go home button
+        document.getElementById('goHomeBtn').addEventListener('click', function() {
+            document.getElementById('hugKissPopup').classList.remove('show');
+            goToPage(1);
         });
 
         // Close popup when clicking outside
