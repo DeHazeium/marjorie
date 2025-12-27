@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Blue Garden Just for You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Allura&family=Sacramento&display=swap" rel="stylesheet">
     <style>
         /* Emoji styling for consistency - Windows style */
         body, button, div, p, h1, h2 {
@@ -24,7 +24,7 @@
 
         /* Cursive with emoji support */
         .name-dedication, .from-name {
-            font-family: 'Great Vibes', 'Segoe UI Emoji', cursive;
+            font-family: 'Sacramento', 'Segoe UI Emoji', cursive;
         }
 
         * {
@@ -1193,11 +1193,12 @@
         }
 
         .popup-header {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5em;
+            font-family: 'Sacramento', cursive;
+            font-size: 3em;
             color: #1565c0;
             margin-bottom: 20px;
             animation: writeText 1s ease-out;
+            font-weight: 400;
         }
 
         .loading-animation {
@@ -1205,10 +1206,10 @@
         }
 
         .hug-container {
-            font-size: 60px;
+            font-size: 80px;
             margin: 20px 0;
             position: relative;
-            height: 80px;
+            height: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1216,56 +1217,163 @@
 
         .hug-emoji {
             position: absolute;
-            animation: hugAnimation 2s ease-in-out infinite;
+            font-size: 80px;
+            animation: hugAnimationCool 2s ease-in-out infinite;
         }
 
         .hug-left {
-            left: 30%;
-            animation-delay: 0s;
+            left: 10%;
+            animation-name: hugFromLeft;
         }
 
         .hug-right {
-            right: 30%;
-            animation-delay: 0.1s;
+            right: 10%;
+            animation-name: hugFromRight;
         }
 
-        @keyframes hugAnimation {
+        .hug-heart {
+            font-size: 60px;
+            z-index: 10;
+            animation: heartPulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+        }
+
+        @keyframes hugFromLeft {
             0%, 100% {
-                transform: translateX(0) scale(1);
+                transform: translateX(0) scale(1) rotate(0deg);
             }
             50% {
-                transform: translateX(10px) scale(1.2);
+                transform: translateX(80px) scale(1.2) rotate(-15deg);
+            }
+        }
+
+        @keyframes hugFromRight {
+            0%, 100% {
+                transform: translateX(0) scale(1) rotate(0deg);
+            }
+            50% {
+                transform: translateX(-80px) scale(1.2) rotate(15deg);
+            }
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
+            }
+            50% {
+                transform: scale(1.3);
+                filter: drop-shadow(0 0 40px rgba(255, 105, 180, 1));
             }
         }
 
         .kiss-container {
-            margin: 20px 0;
+            margin: 30px 0;
+            position: relative;
+            height: 150px;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .kiss-emoji {
-            font-size: 40px;
-            animation: kissFloat 2s ease-in-out infinite;
-            display: inline-block;
+            font-size: 45px;
+            position: absolute;
+            animation: orbitKiss 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
         }
 
-        .kiss-emoji:nth-child(1) { animation-delay: 0s; }
-        .kiss-emoji:nth-child(2) { animation-delay: 0.2s; }
-        .kiss-emoji:nth-child(3) { animation-delay: 0.4s; }
-        .kiss-emoji:nth-child(4) { animation-delay: 0.6s; }
-        .kiss-emoji:nth-child(5) { animation-delay: 0.8s; }
+        .kiss-emoji:nth-child(1) { 
+            animation-delay: 0s;
+            animation-name: orbitKiss1;
+        }
+        .kiss-emoji:nth-child(2) { 
+            animation-delay: 0.6s;
+            animation-name: orbitKiss2;
+        }
+        .kiss-emoji:nth-child(3) { 
+            animation-delay: 1.2s;
+            animation-name: orbitKiss3;
+        }
+        .kiss-emoji:nth-child(4) { 
+            animation-delay: 1.8s;
+            animation-name: orbitKiss4;
+        }
+        .kiss-emoji:nth-child(5) { 
+            animation-delay: 2.4s;
+            animation-name: orbitKiss5;
+        }
 
-        @keyframes kissFloat {
+        @keyframes orbitKiss1 {
             0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.8;
+                transform: translate(0, -60px) scale(0.8) rotate(0deg);
+                opacity: 0.7;
             }
             50% {
-                transform: translateY(-20px) rotate(15deg) scale(1.3);
+                transform: translate(0, -60px) scale(1.3) rotate(360deg);
                 opacity: 1;
+            }
+        }
+
+        @keyframes orbitKiss2 {
+            0%, 100% {
+                transform: translate(57px, -18px) scale(0.8) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(57px, -18px) scale(1.3) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes orbitKiss3 {
+            0%, 100% {
+                transform: translate(35px, 48px) scale(0.8) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(35px, 48px) scale(1.3) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes orbitKiss4 {
+            0%, 100% {
+                transform: translate(-35px, 48px) scale(0.8) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(-35px, 48px) scale(1.3) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes orbitKiss5 {
+            0%, 100% {
+                transform: translate(-57px, -18px) scale(0.8) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(-57px, -18px) scale(1.3) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        .kiss-center {
+            font-size: 40px;
+            z-index: 5;
+            animation: centerSpin 3s linear infinite;
+        }
+
+        @keyframes centerSpin {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
             }
         }
 
@@ -1366,6 +1474,27 @@
             bottom: 10%;
             right: 15%;
             animation-delay: 1.5s;
+        }
+
+        /* Particle burst effect */
+        .particle-burst {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: burstOut 1.5s ease-out forwards;
+        }
+
+        @keyframes burstOut {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
         }
 
         /* Navigation */
@@ -1663,8 +1792,8 @@
 
             <div class="hug-container" id="hugContainer" style="display: none;">
                 <div class="hug-emoji hug-left">🤗</div>
+                <div class="hug-heart">💙</div>
                 <div class="hug-emoji hug-right">🤗</div>
-                <div style="font-size: 50px;">💙</div>
             </div>
 
             <div class="kiss-container" id="kissContainer" style="display: none;">
@@ -1673,6 +1802,7 @@
                 <span class="kiss-emoji">😘</span>
                 <span class="kiss-emoji">💋</span>
                 <span class="kiss-emoji">😘</span>
+                <div class="kiss-center">💖</div>
             </div>
 
             <div class="popup-message" id="popupMessage"></div>
@@ -1831,6 +1961,7 @@
             const popupMessage = document.getElementById('popupMessage');
             const closeBtn = document.getElementById('closePopup');
             const msg = document.getElementById('responseMsg');
+            const popupContent = popup.querySelector('.popup-content');
             
             // Show popup
             popup.classList.add('show');
@@ -1851,12 +1982,14 @@
                 loadingAnimation.style.display = 'none';
                 popupHeader.textContent = 'Virtual Hug!';
                 hugContainer.style.display = 'flex';
+                createParticleBurst(popupContent, '#64b5f6');
                 
                 // Step 2: Show hugs (2 seconds)
                 setTimeout(() => {
                     popupHeader.textContent = 'Sending Kisses!';
                     hugContainer.style.display = 'none';
                     kissContainer.style.display = 'flex';
+                    createParticleBurst(popupContent, '#ff69b4');
                     
                     // Step 3: Show kisses and final message (2 seconds)
                     setTimeout(() => {
@@ -1877,6 +2010,30 @@
                     }, 2000);
                 }, 2000);
             }, 2000);
+        }
+
+        // Create particle burst effect
+        function createParticleBurst(container, color) {
+            const colors = [color, '#90caf9', '#64b5f6', '#42a5f5'];
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle-burst';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = (Math.PI * 2 * i) / 20;
+                const distance = 100 + Math.random() * 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1500);
+            }
         }
 
         // Close popup
