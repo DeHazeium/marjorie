@@ -31,7 +31,7 @@
 
         /* Cursive with emoji support */
         .name-dedication, .from-name {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         * {
@@ -42,7 +42,7 @@
 
         /* Cursive names styling */
         .name-dedication {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
             color: #1565c0;
             margin-bottom: 20px;
@@ -51,8 +51,7 @@
                          0 4px 20px rgba(100, 181, 246, 0.3);
             letter-spacing: 2px;
             position: relative;
-            font-style: italic;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .name-dedication span {
@@ -194,7 +193,7 @@
         }
 
         .from-name {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.8em;
             color: #1565c0;
             display: inline-block;
@@ -202,8 +201,7 @@
             position: relative;
             opacity: 0;
             animation: writeSignature 2.5s ease-out forwards, gentleSwaySmall 3s ease-in-out infinite 2.5s;
-            font-style: italic;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         @keyframes writeSignature {
@@ -1204,12 +1202,12 @@
         }
 
         .popup-header {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
             color: #1565c0;
             margin-bottom: 20px;
             animation: writeText 1s ease-out;
-            font-weight: 400;
+            font-weight: 600;
         }
 
         .loading-animation {
@@ -1232,7 +1230,6 @@
 
         /* Phone devices */
         .phone {
-            position: absolute;
             width: 60px;
             height: 100px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1243,6 +1240,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: phoneShake 2s ease-in-out infinite;
         }
 
         .phone::before {
@@ -1265,39 +1263,21 @@
             border-radius: 50%;
         }
 
-        .phone-left {
-            left: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: phoneShake 2s ease-in-out infinite;
-        }
-
-        .phone-right {
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: phoneShake 2s ease-in-out infinite;
-            animation-delay: 1s;
-        }
-
         @keyframes phoneShake {
             0%, 100% {
-                transform: translateY(-50%) rotate(0deg);
+                transform: rotate(0deg);
             }
             25% {
-                transform: translateY(-50%) rotate(-5deg);
+                transform: rotate(-5deg);
             }
             75% {
-                transform: translateY(-50%) rotate(5deg);
+                transform: rotate(5deg);
             }
         }
 
         /* Country flags */
         .flag {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 8px;
             font-size: 28px;
             animation: flagWave 2s ease-in-out infinite;
             z-index: 10;
@@ -1305,6 +1285,7 @@
             padding: 3px 6px;
             border-radius: 4px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
         @keyframes flagWave {
@@ -1322,7 +1303,7 @@
             font-size: 40px;
             left: 10%;
             top: 50%;
-            animation: flyAcross 3s ease-in-out infinite;
+            animation: flyAcross 4s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
         }
 
@@ -1333,15 +1314,15 @@
                 transform: translateY(-50%) scale(0.5) rotate(0deg);
                 opacity: 0;
             }
-            10% {
+            15% {
                 opacity: 1;
             }
             50% {
                 left: 50%;
                 top: 20%;
-                transform: translateY(-50%) scale(1.5) rotate(360deg);
+                transform: translateY(-50%) scale(1.8) rotate(360deg);
             }
-            90% {
+            85% {
                 opacity: 1;
             }
             100% {
@@ -2002,33 +1983,37 @@
 
             <!-- Phone to Phone Animation for Hug -->
             <div class="phone-animation" id="phoneHugAnimation">
-                <div class="phone phone-left">
+                <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
+                    <div class="phone phone-left"></div>
                     <div class="flag">🇲🇾</div>
                 </div>
-                <div class="phone phone-right">
+                <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
+                    <div class="phone phone-right"></div>
                     <div class="flag">🇵🇭</div>
                 </div>
                 <div class="connection-line"></div>
                 <div class="signal-wave wave-left"></div>
                 <div class="signal-wave wave-right"></div>
                 <div class="flying-emoji" style="animation-delay: 0s;">🤗</div>
-                <div class="flying-emoji" style="animation-delay: 1.5s;">💙</div>
+                <div class="flying-emoji" style="animation-delay: 2s;">💙</div>
             </div>
 
             <!-- Phone to Phone Animation for Kiss -->
             <div class="phone-animation" id="phoneKissAnimation">
-                <div class="phone phone-left">
+                <div style="position: absolute; left: 10%; top: 50%; transform: translateY(-50%);">
+                    <div class="phone phone-left"></div>
                     <div class="flag">🇲🇾</div>
                 </div>
-                <div class="phone phone-right">
+                <div style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%);">
+                    <div class="phone phone-right"></div>
                     <div class="flag">🇵🇭</div>
                 </div>
                 <div class="connection-line"></div>
                 <div class="signal-wave wave-left"></div>
                 <div class="signal-wave wave-right"></div>
                 <div class="flying-emoji" style="animation-delay: 0s;">😘</div>
-                <div class="flying-emoji" style="animation-delay: 1s;">💋</div>
-                <div class="flying-emoji" style="animation-delay: 2s;">💖</div>
+                <div class="flying-emoji" style="animation-delay: 1.5s;">💋</div>
+                <div class="flying-emoji" style="animation-delay: 3s;">💖</div>
             </div>
 
             <div class="hug-container" id="hugContainer" style="display: none;">
@@ -2222,33 +2207,33 @@
             // Create floating hearts
             createFloatingHearts();
             
-            // Step 1: Show initial loading (1 second)
+            // Step 1: Show initial loading (1.5 seconds)
             setTimeout(() => {
                 loadingAnimation.style.display = 'none';
                 popupHeader.textContent = 'Sending Virtual Hug...';
                 phoneHugAnimation.classList.add('active');
                 
-                // Step 2: Phone hug animation (3 seconds)
+                // Step 2: Phone hug animation (4.5 seconds - longer)
                 setTimeout(() => {
                     phoneHugAnimation.classList.remove('active');
                     popupHeader.textContent = 'Virtual Hug!';
                     hugContainer.style.display = 'flex';
                     createParticleBurst(popupContent, '#64b5f6');
                     
-                    // Step 3: Show hug result (2 seconds)
+                    // Step 3: Show hug result (2.5 seconds)
                     setTimeout(() => {
                         hugContainer.style.display = 'none';
                         popupHeader.textContent = 'Sending Kisses...';
                         phoneKissAnimation.classList.add('active');
                         
-                        // Step 4: Phone kiss animation (3 seconds)
+                        // Step 4: Phone kiss animation (4.5 seconds - longer)
                         setTimeout(() => {
                             phoneKissAnimation.classList.remove('active');
                             popupHeader.textContent = 'Sending Kisses!';
                             kissContainer.style.display = 'flex';
                             createParticleBurst(popupContent, '#ff69b4');
                             
-                            // Step 5: Show kisses and final message (2 seconds)
+                            // Step 5: Show kisses and final message (2.5 seconds)
                             setTimeout(() => {
                                 if (choice === 'time') {
                                     popupMessage.innerHTML = 'Thank you for being honest. Take all the time you need.<br>I\'m here whenever you\'re ready. 💙';
@@ -2264,11 +2249,11 @@
                                     msg.innerHTML = '<p>Thank you for giving us a chance to talk.</p><p>Call me, I\'m waiting. I\'m here, and I\'m listening. 💙</p>';
                                 }
                                 msg.classList.add('show');
-                            }, 2000);
-                        }, 3000);
-                    }, 2000);
-                }, 3000);
-            }, 1000);
+                            }, 2500);
+                        }, 4500);
+                    }, 2500);
+                }, 4500);
+            }, 1500);
         }
 
         // Create particle burst effect
