@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Blue Garden Just for You</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Allura&family=Sacramento&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
     <style>
         /* Emoji styling for consistency - Windows style */
         body, button, div, p, h1, h2 {
@@ -1193,14 +1192,14 @@
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: popupBounce 0.5s ease-out;
-            min-height: 450px;
+            min-height: 550px;
             transition: min-height 0.6s ease;
         }
 
         .animation-stage {
             position: relative;
             width: 100%;
-            height: 200px;
+            height: 250px;
             margin: 20px 0;
         }
 
@@ -1258,7 +1257,7 @@
             transition: opacity 0.5s ease;
             pointer-events: none;
             left: 0;
-            top: 80px;
+            top: 100px;
         }
 
         .phone-animation.active {
@@ -1431,10 +1430,10 @@
         }
 
         .hug-container {
-            font-size: 80px;
+            font-size: 140px;
             position: absolute;
             width: 100%;
-            height: 120px;
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1442,72 +1441,77 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             pointer-events: none;
             left: 0;
-            top: 80px;
-            transform: scale(0.9);
+            top: 100px;
+            transform: scale(0.8);
         }
 
         .hug-container.active {
             opacity: 1;
             pointer-events: auto;
             transform: scale(1);
+            animation: hugBounce 2s ease-in-out infinite;
         }
 
-        .hug-emoji {
-            position: absolute;
-            font-size: 80px;
-            animation: hugAnimationCool 2s ease-in-out infinite;
-        }
-
-        .hug-left {
-            left: 10%;
-            animation-name: hugFromLeft;
-        }
-
-        .hug-right {
-            right: 10%;
-            animation-name: hugFromRight;
-        }
-
-        .hug-heart {
-            font-size: 60px;
-            z-index: 10;
-            animation: heartPulse 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
-        }
-
-        @keyframes hugFromLeft {
-            0%, 100% {
-                transform: translateX(0) scale(1) rotate(0deg);
-            }
-            50% {
-                transform: translateX(80px) scale(1.2) rotate(-15deg);
-            }
-        }
-
-        @keyframes hugFromRight {
-            0%, 100% {
-                transform: translateX(0) scale(1) rotate(0deg);
-            }
-            50% {
-                transform: translateX(-80px) scale(1.2) rotate(15deg);
-            }
-        }
-
-        @keyframes heartPulse {
+        @keyframes hugBounce {
             0%, 100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.6));
             }
             50% {
-                transform: scale(1.3);
-                filter: drop-shadow(0 0 40px rgba(255, 105, 180, 1));
+                transform: scale(1.1);
+            }
+        }
+
+        .hug-main {
+            font-size: 140px;
+            position: relative;
+            filter: drop-shadow(0 10px 20px rgba(100, 181, 246, 0.4));
+        }
+
+        .love-particle {
+            position: absolute;
+            font-size: 25px;
+            animation: floatAround 3s ease-in-out infinite;
+        }
+
+        .love-1 {
+            top: -40px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .love-2 {
+            top: -50px;
+            right: -50px;
+            animation-delay: 0.5s;
+        }
+
+        .love-3 {
+            bottom: -30px;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        .love-4 {
+            bottom: -40px;
+            right: -40px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatAround {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-15px) scale(1.3);
+                opacity: 1;
             }
         }
 
         .kiss-container {
             position: absolute;
             width: 100%;
-            height: 150px;
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1515,8 +1519,8 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             pointer-events: none;
             left: 0;
-            top: 80px;
-            transform: scale(0.9);
+            top: 100px;
+            transform: scale(0.8);
         }
 
         .kiss-container.active {
@@ -1525,104 +1529,75 @@
             transform: scale(1);
         }
 
-        .kiss-emoji {
-            font-size: 45px;
+        .kiss-main {
+            font-size: 150px;
+            position: relative;
+            animation: kissAnimation 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
+        }
+
+        @keyframes kissAnimation {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.15) rotate(-10deg);
+            }
+            75% {
+                transform: scale(1.15) rotate(10deg);
+            }
+        }
+
+        .kiss-sparkle {
             position: absolute;
-            animation: orbitKiss 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+            font-size: 30px;
+            animation: sparkleFloat 2s ease-in-out infinite;
         }
 
-        .kiss-emoji:nth-child(1) { 
+        .sparkle-1 {
+            top: -30px;
+            left: -40px;
             animation-delay: 0s;
-            animation-name: orbitKiss1;
         }
-        .kiss-emoji:nth-child(2) { 
+
+        .sparkle-2 {
+            top: -35px;
+            right: -40px;
+            animation-delay: 0.3s;
+        }
+
+        .sparkle-3 {
+            bottom: -25px;
+            left: -35px;
             animation-delay: 0.6s;
-            animation-name: orbitKiss2;
         }
-        .kiss-emoji:nth-child(3) { 
+
+        .sparkle-4 {
+            bottom: -30px;
+            right: -35px;
+            animation-delay: 0.9s;
+        }
+
+        .sparkle-5 {
+            top: 10px;
+            left: -50px;
             animation-delay: 1.2s;
-            animation-name: orbitKiss3;
-        }
-        .kiss-emoji:nth-child(4) { 
-            animation-delay: 1.8s;
-            animation-name: orbitKiss4;
-        }
-        .kiss-emoji:nth-child(5) { 
-            animation-delay: 2.4s;
-            animation-name: orbitKiss5;
         }
 
-        @keyframes orbitKiss1 {
+        .sparkle-6 {
+            top: 10px;
+            right: -50px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkleFloat {
             0%, 100% {
-                transform: translate(0, -60px) scale(0.8) rotate(0deg);
-                opacity: 0.7;
+                transform: scale(0.8) rotate(0deg);
+                opacity: 0.6;
             }
             50% {
-                transform: translate(0, -60px) scale(1.3) rotate(360deg);
+                transform: scale(1.4) rotate(180deg);
                 opacity: 1;
-            }
-        }
-
-        @keyframes orbitKiss2 {
-            0%, 100% {
-                transform: translate(57px, -18px) scale(0.8) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(57px, -18px) scale(1.3) rotate(360deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes orbitKiss3 {
-            0%, 100% {
-                transform: translate(35px, 48px) scale(0.8) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(35px, 48px) scale(1.3) rotate(360deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes orbitKiss4 {
-            0%, 100% {
-                transform: translate(-35px, 48px) scale(0.8) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(-35px, 48px) scale(1.3) rotate(360deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes orbitKiss5 {
-            0%, 100% {
-                transform: translate(-57px, -18px) scale(0.8) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(-57px, -18px) scale(1.3) rotate(360deg);
-                opacity: 1;
-            }
-        }
-
-        .kiss-center {
-            font-size: 40px;
-            z-index: 5;
-            animation: centerSpin 3s linear infinite;
-        }
-
-        @keyframes centerSpin {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.2);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
             }
         }
 
@@ -1631,6 +1606,7 @@
             font-size: 1.2em;
             color: #1565c0;
             margin: 20px 0;
+            margin-top: 280px;
             line-height: 1.6;
             opacity: 0;
             transition: opacity 0.6s ease, transform 0.6s ease;
@@ -2091,18 +2067,25 @@
                 </div>
 
                 <div class="hug-container" id="hugContainer">
-                    <div class="hug-emoji hug-left">🤗</div>
-                    <div class="hug-heart">💙</div>
-                    <div class="hug-emoji hug-right">🤗</div>
+                    <div class="hug-main">
+                        🤗
+                        <div class="love-particle love-1">💕</div>
+                        <div class="love-particle love-2">💖</div>
+                        <div class="love-particle love-3">💗</div>
+                        <div class="love-particle love-4">💝</div>
+                    </div>
                 </div>
 
                 <div class="kiss-container" id="kissContainer">
-                    <span class="kiss-emoji">😘</span>
-                    <span class="kiss-emoji">💋</span>
-                    <span class="kiss-emoji">😘</span>
-                    <span class="kiss-emoji">💋</span>
-                    <span class="kiss-emoji">😘</span>
-                    <div class="kiss-center">💖</div>
+                    <div class="kiss-main">
+                        😘
+                        <div class="kiss-sparkle sparkle-1">✨</div>
+                        <div class="kiss-sparkle sparkle-2">💫</div>
+                        <div class="kiss-sparkle sparkle-3">✨</div>
+                        <div class="kiss-sparkle sparkle-4">💫</div>
+                        <div class="kiss-sparkle sparkle-5">⭐</div>
+                        <div class="kiss-sparkle sparkle-6">⭐</div>
+                    </div>
                 </div>
             </div>
 
@@ -2475,11 +2458,6 @@
         }
 
         generateParticles();
-
-        // Parse all emojis with Twemoji for consistent look
-        if (typeof twemoji !== 'undefined') {
-            twemoji.parse(document.body);
-        }
 
         // Create ripple effect on click
         document.addEventListener('click', function(e) {
